@@ -1,0 +1,87 @@
+"use client";
+import * as React from "react";
+import { Toggle as TogglePrimitive } from "@base-ui/react/toggle";
+import { ToggleGroup as ToggleGroupPrimitive } from "@base-ui/react/toggle-group";
+import { cn } from "cn";
+
+import { toggleVariants } from "@/components/ui/toggle";
+
+const ToggleGroupContext = React.createContext({
+    size: "default",
+    variant: "default",
+    spacing: 2,
+    orientation: "horizontal",
+});
+
+function ToggleGroup({
+    className,
+    variant,
+    size,
+    spacing = 2,
+    orientation = "horizontal",
+    children,
+    ...props
+}) {
+    return (
+        <ToggleGroupPrimitive
+            data-slot="toggle-group"
+            data-variant={variant}
+            data-size={size}
+            data-spacing={spacing}
+            data-orientation={orientation}
+            style={{
+                "--gap": spacing,
+            }}
+            className={cn(
+                "group/toggle-group flex w-fit flex-row items-center gap-[--spacing(var(--gap))] rounded-none data-vertical:flex-col data-vertical:items-stretch",
+                className,
+            )}
+            {...props}
+        >
+            <ToggleGroupContext.Provider
+                value={{ variant, size, spacing, orientation }}
+            >
+                {children}
+            </ToggleGroupContext.Provider>
+        </ToggleGroupPrimitive>
+    );
+}
+
+function ToggleGroupItem({
+    className,
+    children,
+    variant = "default",
+    size = "default",
+    ...props
+}) {
+    const context = React.useContext(ToggleGroupContext);
+
+    return (
+        <TogglePrimitive
+            data-slot="toggle-group-item"
+            data-variant={context.variant || variant}
+            data-size={context.size || size}
+            data-spacing={context.spacing}
+            className={cn(
+                "rounded-md focus:z-10 focus-visible:z-10 data-pressed:z-10",
+
+                "group-data-[spacing=0]/toggle-group:rounded-none",
+                "first:data-[spacing=0]:group-data-horizontal/toggle-group:rounded-l-lg",
+                "last:data-[spacing=0]:group-data-horizontal/toggle-group:rounded-r-lg",
+
+                "data-[variant=outline]:data-[spacing=0]:group-data-horizontal/toggle-group:-ml-px",
+                "first:data-[variant=outline]:data-[spacing=0]:group-data-horizontal/toggle-group:ml-0",
+                toggleVariants({
+                    variant: context.variant || variant,
+                    size: context.size || size,
+                }),
+                className,
+            )}
+            {...props}
+        >
+            {children}
+        </TogglePrimitive>
+    );
+}
+
+export { ToggleGroup, ToggleGroupItem };

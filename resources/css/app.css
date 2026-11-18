@@ -1,0 +1,119 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@import "@fontsource/ibm-plex-mono/400.css";
+
+@font-face {
+    font-family: 'Neue Haas Grotesk';
+    src: url('/font/NeueHaasGroteskDisplayPro55Roman.woff2') format('woff2'),
+         url('/font/NeueHaasGroteskDisplayPro55Roman.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Neue Haas Grotesk';
+    src: url('/font/NeueHaasGroteskDisplayPro65Medium.woff2') format('woff2'),
+         url('/font/NeueHaasGroteskDisplayPro65Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@theme {
+    --font-sans: "Neue Haas Grotesk", sans-serif;
+    --font-mono: "IBM Plex Mono", monospace;
+
+    --color-transparent: var(--transparent);
+    --color-border: var(--border);
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
+    --color-primary: var(--text-primary);
+    --color-secondary: var(--text-secondary);
+}
+
+@layer base {
+    /* .theme {
+
+    } */
+
+    :root {
+        /* new colors
+    --bg-1000: oklch(0.1591 0 0);
+    --bg-950: oklch(0.1815 0 0);
+    --bg-900: oklch(0.2044 0 0);
+    --bg-850: oklch(0.2267 0 0);
+    --bg-800: oklch(0.2484 0 0);
+    --bg-700: oklch(0.311 0 0);
+    --bg-600: oklch(0.3705 0 0);
+    --bg-500: oklch(0.4741 0 0);
+    --bg-400: oklch(0.6494 0 0);
+    --bg-300: oklch(0.757 0 0);
+    --bg-200: oklch(0.8452 0 0);
+    --bg-100: oklch(0.9466 0 0);
+    --bg-75: oklch(0.9696 0 0);
+    --bg-50: oklch(0.9848 0 0);
+    --bg-25: oklch(1 0 0);*/
+
+        --transparent: oklch(1 0 0 / 0%);
+        --background: oklch(1 0 0);
+        --foreground: oklch(0.9848 0 0);
+        --border: oklch(0.9466 0 0);
+        --text-primary: oklch(0.2044 0 0);
+        --text-secondary: oklch(0.4741 0 0);
+    }
+
+    .dark {}
+
+    * {
+        /* @apply border-border outline-ring/50; */
+        @apply border-border;
+    }
+
+    body {
+        @apply font-sans antialiased;
+    }
+}
+
+@layer utilities {
+    .mono-xs {
+        font-family: var(--font-mono);
+        font-size: 12px;
+        line-height: 0.875rem;
+        text-transform: uppercase;
+        font-variant-numeric: slashed-zero;
+        font-weight: 300;
+    }
+
+    .mono-sm {
+        font-family: var(--font-mono);
+        font-size: 14px;
+        line-height: 1.5rem;
+        text-transform: uppercase;
+        font-variant-numeric: slashed-zero;
+        font-weight: 300;
+    }
+
+    .mono-md {
+        font-family: var(--font-mono);
+        font-size: 16px;
+        line-height: 1.125rem;
+        text-transform: uppercase;
+        font-variant-numeric: slashed-zero;
+        font-weight: 300;
+    }
+
+    .sans-sm {
+        font-family: var(--font-sans);
+        font-size: 14px;
+        line-height: 1rem;
+        letter-spacing: 0.02em;
+    }
+
+    .sans-md {
+        font-family: var(--font-sans);
+        font-size: 16px;
+        line-height: 1.115rem;
+        letter-spacing: 0.02em;
+    }
+}
